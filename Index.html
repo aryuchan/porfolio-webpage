@@ -713,42 +713,50 @@
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications">
-      <h2>Certifications</h2>
-      <div class="certs-container">
-        <div class="cert-card">
-          <h3>HTML, CSS, and JavaScript</h3>
-          <p>Coursera</p>
-          <p class="cert-date">Completed: September 2024</p>
-        </div>
-        <div class="cert-card">
-          <h3>Front-End Development with React</h3>
-          <p>Coursera</p>
-          <p class="cert-date">Completed: December 2024</p>
-        </div>
-        <div class="cert-card">
-          <h3>JavaScript Bootcamp</h3>
-          <p>Udemy</p>
-          <p class="cert-date">Completed: February 2025</p>
-        </div>
-        <div class="cert-card">
-          <h3>UX Design Certificate</h3>
-          <p>Google</p>
-          <p class="cert-date">Completed: March 2025</p>
-        </div>
-        <div class="cert-card">
-          <h3>Python beginner's certificate</h3>
-          <p>Udemy</p>
-          <p class="cert-date">Completed: January 2025</p>
-        </div>
-        </div>
-        <div class="cert-card">
-          <h3>Full stack developer beginner's certificate</h3>
-          <p>Udemy</p>
-          <p class="cert-date">Completed: March 2025</p>
-        </div>
-      </div>
-    </section>
+<section id="certifications" aria-labelledby="certifications-heading">
+  <h2 id="certifications-heading">Certifications</h2>
+
+  <div class="certs-container">
+
+    <article class="cert-card">
+      <h3>HTML, CSS, and JavaScript</h3>
+      <p><strong>Provider:</strong> Coursera</p>
+      <p class="cert-date"><strong>Completed:</strong> September 2024</p>
+    </article>
+
+    <article class="cert-card">
+      <h3>Front-End Development with React</h3>
+      <p><strong>Provider:</strong> Coursera</p>
+      <p class="cert-date"><strong>Completed:</strong> December 2024</p>
+    </article>
+
+    <article class="cert-card">
+      <h3>JavaScript Bootcamp</h3>
+      <p><strong>Provider:</strong> Udemy</p>
+      <p class="cert-date"><strong>Completed:</strong> February 2025</p>
+    </article>
+
+    <article class="cert-card">
+      <h3>UX Design Certificate</h3>
+      <p><strong>Provider:</strong> Google</p>
+      <p class="cert-date"><strong>Completed:</strong> March 2025</p>
+    </article>
+
+    <article class="cert-card">
+      <h3>Python Beginner's Certificate</h3>
+      <p><strong>Provider:</strong> Udemy</p>
+      <p class="cert-date"><strong>Completed:</strong> January 2025</p>
+    </article>
+
+    <article class="cert-card">
+      <h3>Full Stack Developer Beginner's Certificate</h3>
+      <p><strong>Provider:</strong> Udemy</p>
+      <p class="cert-date"><strong>Completed:</strong> March 2025</p>
+    </article>
+
+  </div>
+</section>
+
 
     <!-- Contact Section -->
     <section id="contact">
@@ -793,10 +801,11 @@
     </div>
   </footer>
 
-  <!-- Back to Top Button -->
-  <a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
-  </a>
+ <!-- Back to Top Button -->
+<button id="backToTop" class="back-to-top" aria-label="Back to top" title="Back to top">
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</button>
+
 
   <!-- JavaScript -->
   <script>
@@ -842,17 +851,33 @@
     }
 
     // Back to Top Button
-    function initBackToTop() {
-      const backToTop = document.getElementById("backToTop");
-      
-      window.addEventListener("scroll", () => {
-        if (window.pageYOffset > 300) {
-          backToTop.classList.add("visible");
-        } else {
-          backToTop.classList.remove("visible");
-        }
+function initBackToTop() {
+  const backToTop = document.getElementById("backToTop");
+  if (!backToTop) return;
+
+  // Toggle visibility efficiently
+  const toggleVisibility = () => {
+    backToTop.classList.toggle("visible", window.scrollY > 300);
+  };
+
+  // Smooth scroll on click
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // Use requestAnimationFrame for scroll performance
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        toggleVisibility();
+        ticking = false;
       });
+      ticking = true;
     }
+  });
+}
+
 
     // Smooth Scrolling for Navigation
     function initSmoothScrolling() {
